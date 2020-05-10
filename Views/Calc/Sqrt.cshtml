@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Find a Squaredroot Number";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Find the highest number square root:</h1>
+</div>
+
+
+<div class="jumbotron text-center">
+
+    <form asp-controller="Calc" asp-action="Sqrt" method="POST">
+        <input type="text" name="firstNumber" placeholder="First Number" autocomplete="OFF" />
+        <input type="text" name="secondNumber" placeholder="Second Number" autocomplete="OFF" />
+
+        <button type="submit">Calc</button>
+    </form>
+
+</div>
+
+
+@{
+    if (ViewBag.ErrorMessageValue != null)
+    {
+        <div class="text-center text-danger mt-2">
+            <h2>@ViewBag.ErrorMessageValue</h2>
+        </div>
+    }
+}
+
+@{
+    if (ViewBag.FormatError != null)
+    {
+        <div class="text-center text-danger mt-2">
+            <h2>@ViewBag.FormatError</h2>
+        </div>
+    }
+}
+
+@{
+    if (ViewBag.Result != null)
+    {
+        
+        <div class="modal modal-open text-center text-success mt-2">
+            @{
+                if (ViewBag.firstSqrtValue > ViewBag.secondSqrtValue)
+                {
+                    <h2>The number @ViewBag.numberOneValue with Square root @ViewBag.firstSqrtValue has a higher square root than the number @ViewBag.numberTwoValue with square root @ViewBag.secondSqrtValue</h2>
+                }
+                else if (ViewBag.secondSqrtValue > ViewBag.firstSqrtValue)
+                {
+                    <h2>The number @ViewBag.numberTwoValue with Square root @ViewBag.secondSqrtValue has a higher square root than the number @ViewBag.numberOneValue with square root @ViewBag.firstSqrtValue</h2>
+                }
+                else if (ViewBag.secondSqrtValue == ViewBag.firstSqrtValue)
+                {
+                    <h2>The number @ViewBag.numberOneValue with Square root @ViewBag.firstSqrtValue has an equal square root with the number @ViewBag.numberTwoValue with square root @ViewBag.secondSqrtValue</h2>
+                    <p>You may please enter another value</p>
+                }
+            }
+            
+        </div>    
+    }
+}
