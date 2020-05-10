@@ -1,8 +1,50 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Square Root Calculator";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<header>
+  <h1 class="text-center">@ViewData["Title"]</h1>
+</header>
+<hr>
+<main style="width:450px;max-width:100%;margin:0 auto;">
+  <div>
+    <p>This Web Application accept Two numbers and display which has a higher square root to the user</p>
+  </div>
+  <div class="text-center">
+    @{
+      if (ViewBag.Error == "not string")
+      {
+        <p class="alert alert-danger" role="alert">Error: You have entered values that are not numbers. Try again</p>
+      }
+      if (ViewBag.Error == "negative number") 
+      {
+        <p class="alert alert-danger" role="alert">Error: You can't enter a negative numbers. Try again</p>
+      }
+      if (ViewBag.Error == "equal root")
+      {
+        <p class="alert alert-danger" role="alert">Error: The numbers have equal square roots. Please enter another value</p>
+      }
+      if (ViewBag.HigherNum != null)
+      {
+        <p class="alert alert-success" role="alert">
+          The number @ViewBag.HigherNum with square root @ViewBag.HigherRoot has a higher square root than the number 
+          @ViewBag.LowerNum with square root @ViewBag.LowerRoot
+        </p>
+      }
+
+    }
+  </div>
+  <div class="jumbotron text-center">
+    <form asp-controller="Home" asp_action="Index" method="post">
+      <div class="form-group">
+        <label for="first_number">Enter First Number</label>
+        <input type="text" class="form-control" name="firstNumber" id="first_number" placeholder="Enter first number" required>
+      </div>
+      <div class="form-group">
+        <label for="second_number">Enter Second Number</label>
+        <input type="text" class="form-control" name="secondNumber" id="second_number" placeholder="Enter second number" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+  </div>
+</main>
